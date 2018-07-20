@@ -6,7 +6,9 @@
     "deploy": "./deploy.sh"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "fs-extra": "^7.0.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^10.5.2",
