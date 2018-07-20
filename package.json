@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "nodemon",
+    "build": "tsc",
+    "start:prod": "node dist/index.js",
+    "deploy": "./deploy.sh"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.2",
+    "nodemon": "^1.18.3",
+    "typescript": "^2.9.2"
+  }
+}
