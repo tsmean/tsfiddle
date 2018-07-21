@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TscService } from './tsc.service';
+import { Recoverable } from 'repl';
 
 // export const EDITOR_TEMPLATE = `log("Hello world!")`;
 export const EDITOR_TEMPLATE = `console.log('Hello world!')`;
@@ -22,7 +23,6 @@ export class AppComponent {
   output;
 
   constructor(private tscService: TscService) {
-
   }
 
   onEditorInit(editor) {
@@ -77,7 +77,6 @@ export class AppComponent {
       } else {
         this.reset();
         eval(resp.compiledJS);
-        console.log('yippie!');
       }
     }, errorResp => {
       this.loading = false;

@@ -20,18 +20,17 @@ enum STATUS_CODES {
 // const setupCustomScript = `import {log} from '@tsfiddle/logger';
 // `
 
-const loggerAsString = `function log(input) {
+const loggerAsString = `function (message?: any, ...optionalParams: any[]) {
   const div = document.createElement('DIV');
-  div.innerHTML = '> ' + input;
+  div.innerHTML = '> ' + message;
   document.getElementById('output').appendChild(div);
 }`
 
 const setupCustomScript = `
-const stashedConsoleLog = window.console.log;
-window.console.log = ${loggerAsString};
+var console: Console = {...console};
+console.log = ${loggerAsString};
 `;
 const tearDownCustomScript = `
-window.console.log = stashedConsoleLog;
 `
 
 function doBrowserify(jsFile) {
@@ -63,6 +62,7 @@ ${setupCustomScript}
 ${input}
 ${tearDownCustomScript}
 `);
+    console.log(await fs.readFile(tsFile, 'utf8'));
     try {
       await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
     } catch (err) {
