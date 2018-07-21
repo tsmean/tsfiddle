@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import {environment} from '../environments/environment';
 
 @Injectable({
@@ -7,11 +7,11 @@ import {environment} from '../environments/environment';
 })
 export class TscService {
   constructor(
-    private http: Http
+    private http: HttpClient
   ) { }
 
   compileCode(typeScriptCode: string) {
-    this.http.get(`${environment.apiUrl}`)
+    return this.http.get(`${environment.apiUrl}`);
   }
 
 }

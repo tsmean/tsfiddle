@@ -9,12 +9,22 @@ import { TscService } from './tsc.service';
 export class AppComponent {
 
   input: string;
+  output: string;
 
   constructor(private tscService: TscService) {
 
   }
 
   runCode() {
-    this.tscService.compileCode(this.input);
+    this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
+      this.output = resp.compiledJS;
+    }, errorResp => {
+      console.error(errorResp);
+      alert('Oops, something went wrong.');
+    });
   }
+}
+
+interface TscResponse {
+  compiledJS: string;
 }
