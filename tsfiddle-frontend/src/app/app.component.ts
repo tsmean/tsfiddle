@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TscService } from './tsc.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+
+  input: string;
+
+  constructor(private tscService: TscService) {
+
+  }
+
+  runCode() {
+    this.tscService.compileCode(this.input);
+  }
 }

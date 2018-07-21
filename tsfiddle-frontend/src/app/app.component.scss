@@ -1,0 +1,50 @@
+$navbar-height: 70px;
+
+.page-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .navbar {
+        flex-basis: $navbar-height;
+        flex-shrink: 0;
+        flex-grow: 0;
+        display: flex;
+        background: #1f1f1f;
+        padding: 15px;
+        justify-content: flex-end;
+        button {
+            margin-right: 20px;
+            &.last-button {
+                margin-right: 0;
+            }
+        }
+    }
+    .editor-and-output-wrapper {
+        display: flex;
+        .editor {
+            flex-basis: 50%;
+            flex-shrink: 0;
+            flex-grow: 1;
+            background: black;
+            height: calc(100vh - #{$navbar-height});
+            color: white;
+            padding: 20px;
+            font-size: 16px;
+            border: 0;
+            font-family: monospace;
+            &:focus {
+                outline: none;
+            }
+        }
+        .output-wrapper {
+            background: #0c0c0c;
+            color: #eee;
+            flex-basis: 50%;
+            flex-shrink: 0;
+            flex-grow: 1;
+            padding: 20px;
+            font-family: monospace;
+        }
+    }
+    
+}

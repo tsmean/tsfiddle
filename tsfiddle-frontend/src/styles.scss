@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+button {
+    background: #eee;
+    border: 0;
+    border-radius: 0;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    &.primary {
+        background: #888888;
+        color: white;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
