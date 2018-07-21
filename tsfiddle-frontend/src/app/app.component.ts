@@ -89,7 +89,8 @@ export function removeAllChildren(node: HTMLElement) {
 }
 
 // export const EDITOR_TEMPLATE = `log("Hello world!")`;
-export const EDITOR_TEMPLATE = `const getDatabaseConnection: () => Promise<DatabaseConnection> = () => {
+export const EDITOR_TEMPLATE = `console.log('Starting...');
+const getDatabaseConnection: () => Promise<DatabaseConnection> = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
