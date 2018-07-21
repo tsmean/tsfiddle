@@ -29,6 +29,9 @@ button {
         padding: 0;
         background: transparent;
     }
+    &:focus {
+        outline: none;
+    }
 }
 
 
