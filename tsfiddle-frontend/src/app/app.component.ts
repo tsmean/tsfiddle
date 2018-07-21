@@ -25,43 +25,10 @@ export class AppComponent {
     this.editor = editor;
   }
 
-  transpile = (): Promise<EmitOutput> => {
-    let model = this.editor.getModel();
-    return new Promise(resolve => {
-      monaco.languages.typescript.getTypeScriptWorker()
-        .then(worker => {
-          worker(model.uri)
-            .then(client => {
-              client.getSyntacticDiagnostics(model.uri.toString()).then(r => {
-                // not too helpful so far...
-              })
-              client.getEmitOutput(model.uri.toString()).then(r => {
-                resolve(r);;
-              });
-            });
-        });
-    });
-  }
-
   reset() {
     this.compilationError = null;
     removeAllChildren(document.getElementById('output'));
   }
-
-  // runCodeInFrontend() {
-  //   this.reset();
-  //   this.loading = true;
-  //   this.transpile().then(resp => {
-  //     const js = resp.outputFiles[0].text;
-  //     if (js) {
-  //       this.reset();
-  //       eval(js);
-  //       this.loading = false;
-  //     }
-  //   }).catch(errorResp => {
-  //     console.log(errorResp);
-  //   });
-  // }
 
   runCode() {
     this.reset();
@@ -88,7 +55,6 @@ export function removeAllChildren(node: HTMLElement) {
   }
 }
 
-// export const EDITOR_TEMPLATE = `log("Hello world!")`;
 export const EDITOR_TEMPLATE = `console.log('Starting...');
 const getDatabaseConnection: () => Promise<DatabaseConnection> = () => {
   return new Promise((resolve, reject) => {

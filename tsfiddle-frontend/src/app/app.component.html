@@ -6,9 +6,6 @@
            alt="">
     </button>
     <div class="navbar-right">
-      <!-- <button class="primary">SAVE</button> -->
-      <!-- <button class="primary"
-              (click)="runCodeInFrontend()">RUN FE</button> -->
       <button class="last-button primary"
               (click)="runCode()">
         RUN
@@ -17,20 +14,12 @@
   </div>
   <div class="editor-and-output-wrapper">
     <div class="editor-wrapper">
-      <!-- TODO IMPORTANT: think about logging!!!!! -->
-      <!-- <div class="predefined">
-        import &#123;log&#125; from 'tsfiddle-logger';
-      </div> -->
       <div class="editor">
         <ngx-monaco-editor class="monaco-editor"
                            [options]="editorOptions"
                            (onInit)="onEditorInit($event)"
                            [(ngModel)]="input"></ngx-monaco-editor>
       </div>
-
-      <!-- <textarea autofocus
-                [(ngModel)]="input"
-                class="editor"></textarea> -->
     </div>
     <div class="output-wrapper">
       <div style="padding-bottom: 5px">Output:</div>
@@ -42,7 +31,6 @@
       </div>
       <div id="output"
            #output>
-
       </div>
     </div>
   </div>
