@@ -6,11 +6,14 @@
   </div>
   <div class="editor-and-output-wrapper">
     <textarea autofocus
+              [(ngModel)]="input"
               class="editor"></textarea>
     <div class="output-wrapper">
       <div>Output:</div>
-      <spinner *ngIf="loading" color="primary"></spinner>
-      <div class="compilation-error" *ngIf="compilationError">
+      <spinner *ngIf="loading"
+               color="primary"></spinner>
+      <div class="compilation-error"
+           *ngIf="compilationError">
         {{compilationError}}
       </div>
       <div id="output">

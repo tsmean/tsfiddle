@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TscService } from './tsc.service';
 import { SpinnerModule } from '@tsmean/spinner';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { SpinnerModule } from '@tsmean/spinner';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     SpinnerModule.forRoot({
       primaryColor: 'white',
       secondaryColor: '#00ff00',

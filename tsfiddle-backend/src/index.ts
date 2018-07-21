@@ -7,9 +7,11 @@ const GENERATED_FILES_DIRECTORY = 'generated';
 const util = require('util');
 const execPromise = util.promisify(exec);
 var cors = require('cors');
+var bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 
 enum STATUS_CODES {
   BAD_REQUEST = 400
@@ -23,13 +25,14 @@ const loggerCode: string = `const log = (input) => {
 
 app.use('/', express.static('ng-dist/tsfiddle-frontend'))
 
-app.get('/api/compile', async function (req, res) {
+app.post('/api/compile', async function (req: any, res) {
   try {
+    const input = req.body.input;
     const uuid = uuidv1();
     const fileWithoutExtesion = `${GENERATED_FILES_DIRECTORY}/${uuid}`
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
-    await fs.outputFile(tsFile, `${loggerCode}const a = 5; const b = 7; log(a+b)`);
+    await fs.outputFile(tsFile, `${loggerCode}${input}`);
     try {
       await execPromise(`tsc ${tsFile}`);
     } catch (err) {
