@@ -1,4 +1,8 @@
 {
+  "description": "",
+  "repository": {},
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "nodemon",
     "build": "tsc",
