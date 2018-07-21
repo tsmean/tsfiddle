@@ -5,28 +5,8 @@ import { AppComponent } from './app.component';
 import { TscService } from './tsc.service';
 import { SpinnerModule } from '@tsmean/spinner';
 import { FormsModule } from '@angular/forms';
-import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
-
-const monacoConfig: NgxMonacoEditorConfig = {
-  defaultOptions: {
-    scrollBeyondLastLine: false,
-    minimap: {
-      enabled: false
-    }
-  },
-  onMonacoLoad: () => {
-    const monaco = (<any>window).monaco;
-    // I don't know what's wrong with this setup, but it for sure causes a lot of problems...
-    // monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-    //   target: monaco.languages.typescript.ScriptTarget.ES5,
-    //   lib: [ "es2015", "dom" ],
-    //   allowNonTsExtensions: true
-    // });
-    monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      `declare function log(input: string) : string`
-    );
-  }
-};
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { monacoConfig } from './editor.config';
 
 @NgModule({
   declarations: [

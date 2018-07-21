@@ -3,8 +3,7 @@
   <h1 align="center">tsfiddle</h1>
 </p>
 
-
-A playground for fiddling with TypeScript. Like jsfiddle, but without the need to view console logs. And of course with TypeScript as default.
+A playground for fiddling with TypeScript. Like jsfiddle, but a bit more streamlined for pure TypeScript.
 
 ## Live: https://tsfiddle.tsmean.com
 

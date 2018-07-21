@@ -9,7 +9,7 @@
     "start:prod": "node dist/index.js",
     "build:docker": "docker build -t tsmean/tsfiddle .",
     "publish:docker": "docker push tsmean/tsfiddle",
-    "deploy": "./deploy.sh"
+    "deploy": "./stackdeploy.sh"
   },
   "dependencies": {
     "@tsfiddle/logger": "0.0.0",

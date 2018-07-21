@@ -1,6 +1,6 @@
 # Build Frontend
 cd tsfiddle-frontend
-npm run build
+npm run build:prod
 rm -rf ../tsfiddle-backend/ng-dist
 cp -r dist ../tsfiddle-backend/ng-dist
 cd ..
