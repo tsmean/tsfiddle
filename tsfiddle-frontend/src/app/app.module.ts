@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TscService } from './tsc.service';
+import { SpinnerModule } from '@tsmean/spinner';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,12 @@ import { TscService } from './tsc.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    SpinnerModule.forRoot({
+      primaryColor: 'white',
+      secondaryColor: '#00ff00',
+      animation: 'spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite'
+    })
   ],
   providers: [TscService],
   bootstrap: [AppComponent]

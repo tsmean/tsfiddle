@@ -3,6 +3,8 @@
     "start": "nodemon",
     "build": "tsc",
     "start:prod": "node dist/index.js",
+    "build:docker": "docker build -t tsmean/tsfiddle .",
+    "publish:docker": "docker push tsmean/tsfiddle",
     "deploy": "./deploy.sh"
   },
   "dependencies": {

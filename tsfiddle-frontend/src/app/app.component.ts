@@ -16,22 +16,34 @@ export class AppComponent {
 
   }
 
-  runCode() {
+  reset() {
     this.compilationError = null;
+    removeAllChildren(document.getElementById('output'));
+  }
+
+  runCode() {
+    this.reset();
+    this.loading = true;
     this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
+      this.loading = false;
       if (resp.compilationError != null) {
         this.compilationError = resp.compilationError.stdout;
       } else {
         eval(resp.compiledJS);
       }
     }, errorResp => {
+      this.loading = false;
       console.error(errorResp);
       alert('Oops, something went wrong.');
     });
   }
 }
 
-
+export function removeAllChildren(node: HTMLElement) {
+  while (node.firstChild) {
+    node.removeChild(node.firstChild);
+  }
+}
 
 interface TscResponse {
   compiledJS: string;

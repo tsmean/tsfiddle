@@ -9,6 +9,7 @@
               class="editor"></textarea>
     <div class="output-wrapper">
       <div>Output:</div>
+      <spinner *ngIf="loading" color="primary"></spinner>
       <div class="compilation-error" *ngIf="compilationError">
         {{compilationError}}
       </div>
