@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="navbar">
-    <button class="primary">SAVE</button>
+    <!-- <button class="primary">SAVE</button> -->
     <button class="last-button primary"
             (click)="runCode()">RUN</button>
   </div>
@@ -9,6 +9,12 @@
               class="editor"></textarea>
     <div class="output-wrapper">
       <div>Output:</div>
+      <div class="compilation-error" *ngIf="compilationError">
+        {{compilationError}}
+      </div>
+      <div id="output">
+
+      </div>
     </div>
   </div>
 </div>

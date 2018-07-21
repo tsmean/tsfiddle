@@ -15,13 +15,19 @@ enum STATUS_CODES {
   BAD_REQUEST = 400
 }
 
+const loggerCode: string = `const log = (input) => {
+  const div = document.createElement('DIV');
+  div.innerHTML = '> ' + input;
+  document.getElementById('output').appendChild(div);
+}\n\n`
+
 app.get('/', async function (req, res) {
   try {
     const uuid = uuidv1();
     const fileWithoutExtesion = `${GENERATED_FILES_DIRECTORY}/${uuid}`
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
-    await fs.outputFile(tsFile, 'console.log(\'hi\')');
+    await fs.outputFile(tsFile, `${loggerCode}const a = 5; const b = 7; log(a+b)`);
     try {
       await execPromise(`tsc ${tsFile}`);
     } catch (err) {

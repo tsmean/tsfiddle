@@ -9,16 +9,21 @@ import { TscService } from './tsc.service';
 export class AppComponent {
 
   input: string;
-  output: string;
+  compilationError: string;
+  loading: boolean = false;
 
   constructor(private tscService: TscService) {
 
   }
 
   runCode() {
+    this.compilationError = null;
     this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
-      this.output = resp.compiledJS;
-      eval(this.output);
+      if (resp.compilationError != null) {
+        this.compilationError = resp.compilationError.stdout;
+      } else {
+        eval(resp.compiledJS);
+      }
     }, errorResp => {
       console.error(errorResp);
       alert('Oops, something went wrong.');
@@ -26,6 +31,9 @@ export class AppComponent {
   }
 }
 
+
+
 interface TscResponse {
   compiledJS: string;
+  compilationError?: any;
 }
