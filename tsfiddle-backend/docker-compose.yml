@@ -5,8 +5,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
-          memory: 256M
+          cpus: '1'
+          memory: 512M
       labels:
         - "traefik.frontend.rule=Host:tsfiddle.tsmean.com"
         - "traefik.port=5638"
