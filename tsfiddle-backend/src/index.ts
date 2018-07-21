@@ -21,7 +21,9 @@ const loggerCode: string = `const log = (input) => {
   document.getElementById('output').appendChild(div);
 }\n\n`
 
-app.get('/', async function (req, res) {
+app.use('/', express.static('ng-dist/tsfiddle-frontend'))
+
+app.get('/api/compile', async function (req, res) {
   try {
     const uuid = uuidv1();
     const fileWithoutExtesion = `${GENERATED_FILES_DIRECTORY}/${uuid}`

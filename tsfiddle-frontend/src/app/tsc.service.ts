@@ -11,7 +11,7 @@ export class TscService {
   ) { }
 
   compileCode(typeScriptCode: string) {
-    return this.http.get(`${environment.apiUrl}`);
+    return this.http.get(`${environment.apiUrl}/compile`);
   }
 
 }

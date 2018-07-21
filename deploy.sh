@@ -1,11 +1,12 @@
 # Build Frontend
 cd tsfiddle-frontend
 npm run build
-mv dist ../tsfiddle-backend
+rm -rf ../tsfiddle-backend/ng-dist
+cp -r dist ../tsfiddle-backend/ng-dist
 cd ..
 
 # Build Backend (precondition: frontend is built)
 cd tsfiddle-backend
-npm run build:docker-image
-npm run publish:docker-image
+npm run build:docker
+npm run publish:docker
 npm run deploy
