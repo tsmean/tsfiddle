@@ -22,6 +22,10 @@ button {
     }
 }
 
+::selection {
+    background: #FFC400;
+}
+
 * {
     box-sizing: border-box;
 }

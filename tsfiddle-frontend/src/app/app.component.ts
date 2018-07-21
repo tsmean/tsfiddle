@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TscService } from './tsc.service';
 
 @Component({
@@ -11,6 +11,10 @@ export class AppComponent {
   input: string;
   compilationError: string;
   loading: boolean = false;
+  noOutput: boolean = false;
+
+  @ViewChild('output')
+  output;
 
   constructor(private tscService: TscService) {
 
@@ -18,6 +22,7 @@ export class AppComponent {
 
   reset() {
     this.compilationError = null;
+    this.noOutput = null;
     removeAllChildren(document.getElementById('output'));
   }
 
@@ -30,6 +35,9 @@ export class AppComponent {
         this.compilationError = resp.compilationError.stdout;
       } else {
         eval(resp.compiledJS);
+        if (this.output.nativeElement.children.length === 0) {
+          this.noOutput = true;
+        }
       }
     }, errorResp => {
       this.loading = false;

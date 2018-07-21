@@ -5,18 +5,28 @@
             (click)="runCode()">RUN</button>
   </div>
   <div class="editor-and-output-wrapper">
-    <textarea autofocus
-              [(ngModel)]="input"
-              class="editor"></textarea>
+    <div class="editor-wrapper">
+      <div class="predefined">// use
+        <code>log</code> instead of
+        <code>console.log</code>
+      </div>
+      <textarea autofocus
+                [(ngModel)]="input"
+                class="editor"></textarea>
+    </div>
     <div class="output-wrapper">
-      <div>Output:</div>
+      <div style="padding-bottom: 5px">Output:</div>
       <spinner *ngIf="loading"
                color="primary"></spinner>
       <div class="compilation-error"
            *ngIf="compilationError">
         {{compilationError}}
       </div>
-      <div id="output">
+      <div class="no-outout"
+           *ngIf="noOutput">
+        (there was no output)
+      </div>
+      <div id="output" #output>
 
       </div>
     </div>
