@@ -41,13 +41,9 @@ Let's leave it at frontend `eval` for now. There isn't really anything else on t
 
 How should I do it with the logging? Should I take `console.log` and modify it? Should I use a custom `log` function? Should I let the user import the logger (`import {log} from '@tsfiddle/logger'`) or should I provide this implicitly...?
 
-### Intermediate Decision
+### Final Decision
 
-I think a custom `log` is okay... I mean it's better than fumbling around in the behaviour of console.log, right? Hm, then on the other hand, it's not even that hard to define a custom behaviour:
-```
-var console = {};
-console.log = function(){};
-```
+The more isomorphic the better. Meaning: It's nice when users can copy their code from A to B and don't have to replace all their console.logs. With the standard `console.log` we can't be so wrong?
 
 
 ## Storage
