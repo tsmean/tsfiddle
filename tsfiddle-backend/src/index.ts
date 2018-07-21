@@ -17,6 +17,23 @@ enum STATUS_CODES {
   BAD_REQUEST = 400
 }
 
+// const setupCustomScript = `import {log} from '@tsfiddle/logger';
+// `
+
+const loggerAsString = `function log(input) {
+  const div = document.createElement('DIV');
+  div.innerHTML = '> ' + input;
+  document.getElementById('output').appendChild(div);
+}`
+
+const setupCustomScript = `
+const stashedConsoleLog = window.console.log;
+window.console.log = ${loggerAsString};
+`;
+const tearDownCustomScript = `
+window.console.log = stashedConsoleLog;
+`
+
 function doBrowserify(jsFile) {
   const b = browserify();
   b.add(jsFile);
@@ -41,7 +58,11 @@ app.post('/api/compile', async function (req: any, res) {
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
     const bundle = fileWithoutExtesion + 'bundle.js';
-    await fs.outputFile(tsFile, `import {log} from '@tsfiddle/logger';\n${input}`);
+    await fs.outputFile(tsFile, `
+${setupCustomScript}
+${input}
+${tearDownCustomScript}
+`);
     try {
       await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
     } catch (err) {

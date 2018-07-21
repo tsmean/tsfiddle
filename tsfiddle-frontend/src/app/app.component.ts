@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { TscService } from './tsc.service';
 
-export const EDITOR_TEMPLATE = `log("Hello world!")`
+// export const EDITOR_TEMPLATE = `log("Hello world!")`;
+export const EDITOR_TEMPLATE = `console.log('Hello world!')`;
 
 @Component({
   selector: 'app-root',
@@ -51,20 +52,20 @@ export class AppComponent {
     removeAllChildren(document.getElementById('output'));
   }
 
-  runCodeInFrontend() {
-    this.reset();
-    this.loading = true;
-    this.transpile().then(resp => {
-      const js = resp.outputFiles[0].text;
-      if (js) {
-        this.reset();
-        eval(js);
-        this.loading = false;
-      }
-    }).catch(errorResp => {
-      console.log(errorResp);
-    });
-  }
+  // runCodeInFrontend() {
+  //   this.reset();
+  //   this.loading = true;
+  //   this.transpile().then(resp => {
+  //     const js = resp.outputFiles[0].text;
+  //     if (js) {
+  //       this.reset();
+  //       eval(js);
+  //       this.loading = false;
+  //     }
+  //   }).catch(errorResp => {
+  //     console.log(errorResp);
+  //   });
+  // }
 
   runCode() {
     this.reset();
@@ -76,6 +77,7 @@ export class AppComponent {
       } else {
         this.reset();
         eval(resp.compiledJS);
+        console.log('yippie!');
       }
     }, errorResp => {
       this.loading = false;
