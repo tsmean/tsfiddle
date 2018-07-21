@@ -1,9 +1,8 @@
 import * as express from 'express';
 import { resolve } from 'url';
 import {exec} from 'child_process';
-const fs = require('fs-extra');
+import * as fs from 'fs-extra';
 const uuidv1 = require('uuid/v1');
-const GENERATED_FILES_DIRECTORY = 'generated';
 const util = require('util');
 const execPromise = util.promisify(exec);
 var cors = require('cors');
@@ -37,7 +36,8 @@ app.post('/api/compile', async function (req: any, res) {
   try {
     const input = req.body.input;
     const uuid = uuidv1();
-    const fileWithoutExtesion = `${GENERATED_FILES_DIRECTORY}/${uuid}`
+    const generatedFilesDirectory = `generated/${uuid}`;
+    const fileWithoutExtesion = `${generatedFilesDirectory}/${uuid}`
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
     const bundle = fileWithoutExtesion + 'bundle.js';
@@ -51,6 +51,7 @@ app.post('/api/compile', async function (req: any, res) {
     }
     await doBrowserify2(jsFile, bundle);
     const js = await fs.readFile(bundle, 'utf8');
+    await fs.remove(`${generatedFilesDirectory}`);
     res.send({compiledJS: js});
   } catch (err) {
     res.status(500).send(err);
