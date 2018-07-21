@@ -52,7 +52,7 @@ Once the users can store their fiddles, we also need a good concept.
 ### Database
 Where should we store the fiddles? MongoDB? PostgreSQL? https://github.com/HouzuoGuo/tiedot?
 
-### How sould we version docs?
+### How should we version docs?
 How about each save generates a new id...? That way you don't need a login concept (just yet).
 
 
