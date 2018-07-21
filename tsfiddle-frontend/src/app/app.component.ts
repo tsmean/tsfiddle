@@ -32,7 +32,7 @@ export class AppComponent {
     return new Promise(resolve => {
       monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
         target: monaco.languages.typescript.ScriptTarget.ES5,
-        lib: ['es6', 'es2015', 'dom'],
+        lib: ['ES6', 'ES2015', 'DOM'],
         allowNonTsExtensions: true
       });
       monaco.languages.typescript.getTypeScriptWorker()
