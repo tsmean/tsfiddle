@@ -41,7 +41,7 @@ app.post('/api/compile', async function (req: any, res) {
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
     const bundle = fileWithoutExtesion + 'bundle.js';
-    await fs.outputFile(tsFile, input);
+    await fs.outputFile(tsFile, `import {log} from '@tsfiddle/logger';\n${input}`);
     try {
       await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
     } catch (err) {

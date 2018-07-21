@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { TscService } from './tsc.service';
 
+export const EDITOR_TEMPLATE = `log("Hello world!")`
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +14,7 @@ export class AppComponent {
   loading: boolean = false;
 
   editorOptions = { theme: 'vs-dark', language: 'typescript' };
-  input: string = `import {log} from '@tsfiddle/logger';\nlog("Hello world!")`;
+  input: string = EDITOR_TEMPLATE;
   editor = null;
 
   @ViewChild('output')
@@ -24,17 +26,11 @@ export class AppComponent {
 
   onEditorInit(editor) {
     this.editor = editor;
-    // this.editor.languages.register({id:"typescript"});
   }
 
   transpile = (): Promise<EmitOutput> => {
     let model = this.editor.getModel();
     return new Promise(resolve => {
-      monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-        target: monaco.languages.typescript.ScriptTarget.ES5,
-        lib: ['ES6', 'ES2015', 'DOM'],
-        allowNonTsExtensions: true
-      });
       monaco.languages.typescript.getTypeScriptWorker()
         .then(worker => {
           worker(model.uri)
@@ -61,9 +57,8 @@ export class AppComponent {
     this.transpile().then(resp => {
       const js = resp.outputFiles[0].text;
       if (js) {
-        const parsedJs = loggerCode + js;
         this.reset();
-        eval(parsedJs);
+        eval(js);
         this.loading = false;
       }
     }).catch(errorResp => {
@@ -81,9 +76,6 @@ export class AppComponent {
       } else {
         this.reset();
         eval(resp.compiledJS);
-        // if (this.output.nativeElement.children.length === 0) {
-        //   this.noOutput = true;
-        // }
       }
     }, errorResp => {
       this.loading = false;
@@ -92,14 +84,6 @@ export class AppComponent {
     });
   }
 }
-
-
-const loggerCode: string = `const log = (input) => {
-  const div = document.createElement('DIV');
-  div.innerHTML = '> ' + input;
-  document.getElementById('output').appendChild(div);
-}\n\n`
-
 
 export function removeAllChildren(node: HTMLElement) {
   while (node.firstChild) {

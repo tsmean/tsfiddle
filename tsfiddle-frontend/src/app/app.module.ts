@@ -16,10 +16,15 @@ const monacoConfig: NgxMonacoEditorConfig = {
   },
   onMonacoLoad: () => {
     const monaco = (<any>window).monaco;
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      target: monaco.languages.typescript.ScriptTarget.ES5,
+      lib: ['ES6', 'ES2015', 'DOM'],
+      allowNonTsExtensions: true,
+      typeRoots: ["logger"]
+    });
     monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      'export function log(str: string): void;',
-      'node_modules/@types/tsfiddle-logger/index.d.ts'
-    )
+      `declare function log(input: string) : string`
+    );
   }
 };
 
