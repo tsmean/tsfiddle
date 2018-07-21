@@ -18,9 +18,8 @@ const monacoConfig: NgxMonacoEditorConfig = {
     const monaco = (<any>window).monaco;
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       target: monaco.languages.typescript.ScriptTarget.ES5,
-      lib: ['ES6', 'ES2015', 'DOM'],
-      allowNonTsExtensions: true,
-      typeRoots: ["logger"]
+      lib: ['ES5', 'ES2015', 'DOM'],
+      allowNonTsExtensions: true
     });
     monaco.languages.typescript.typescriptDefaults.addExtraLib(
       `declare function log(input: string) : string`
