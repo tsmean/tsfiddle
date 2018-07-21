@@ -10,7 +10,6 @@ export class AppComponent {
 
   compilationError: string;
   loading: boolean = false;
-  noOutput: boolean = false;
 
   editorOptions = { theme: 'vs-dark', language: 'typescript' };
   input: string = `console.log("Hello world!")`;
@@ -40,7 +39,7 @@ export class AppComponent {
           worker(model.uri)
             .then(client => {
               client.getSyntacticDiagnostics(model.uri.toString()).then(r => {
-                console.log(r);
+                // not too helpful so far...
               })
               client.getEmitOutput(model.uri.toString()).then(r => {
                 resolve(r);;
@@ -52,7 +51,6 @@ export class AppComponent {
 
   reset() {
     this.compilationError = null;
-    this.noOutput = null;
     removeAllChildren(document.getElementById('output'));
   }
 
@@ -60,7 +58,6 @@ export class AppComponent {
     this.reset();
     this.loading = true;
     this.transpile().then(resp => {
-      console.log(JSON.stringify(resp));
       const js = resp.outputFiles[0].text;
       if (js) {
         const parsedJs = loggerCode + js.replace(/console\.log/g, 'log');
@@ -69,9 +66,6 @@ export class AppComponent {
       } else {
         this.noOutput = true;
       }
-      // if (this.output.nativeElement.children.length === 0) {
-      //   this.noOutput = true;
-      // }
     }).catch(errorResp => {
       console.log(errorResp);
     });
