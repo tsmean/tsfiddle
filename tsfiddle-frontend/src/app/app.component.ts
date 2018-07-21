@@ -12,7 +12,7 @@ export class AppComponent {
   loading: boolean = false;
 
   editorOptions = { theme: 'vs-dark', language: 'typescript' };
-  input: string = `console.log("Hello world!")`;
+  input: string = `import {log} from '@tsfiddle/logger';\nlog("Hello world!")`;
   editor = null;
 
   @ViewChild('output')
@@ -61,7 +61,7 @@ export class AppComponent {
     this.transpile().then(resp => {
       const js = resp.outputFiles[0].text;
       if (js) {
-        const parsedJs = loggerCode + js.replace(/console\.log/g, 'log');
+        const parsedJs = loggerCode + js;
         eval(parsedJs);
         this.loading = false;
       }

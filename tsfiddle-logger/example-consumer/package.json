@@ -1,0 +1,14 @@
+{
+  "name": "libconsumer",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hwrld": "^2.0.0"
+  }
+}

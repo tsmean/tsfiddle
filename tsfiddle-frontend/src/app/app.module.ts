@@ -16,6 +16,10 @@ const monacoConfig: NgxMonacoEditorConfig = {
   },
   onMonacoLoad: () => {
     const monaco = (<any>window).monaco;
+    monaco.languages.typescript.typescriptDefaults.addExtraLib(
+      'export function log(str: string): void;',
+      'node_modules/@types/tsfiddle-logger/index.d.ts'
+    )
   }
 };
 

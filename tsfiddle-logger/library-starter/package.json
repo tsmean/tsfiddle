@@ -1,0 +1,30 @@
+{
+  "name": "@tsfiddle/logger",
+  "version": "0.0.0",
+  "description": "Can log",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "link": "npm run build && cd dist && npm link"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bersling/typescript-library-starter.git"
+  },
+  "keywords": [
+    "logger",
+    "typescript",
+    "tsfiddle"
+  ],
+  "author": "Daniel Niederberger <bersling@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bersling/typescript-library-starter/issues"
+  },
+  "homepage": "https://github.com/bersling/typescript-library-starter#readme",
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  }
+}

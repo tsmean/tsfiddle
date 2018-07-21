@@ -17,12 +17,6 @@ enum STATUS_CODES {
   BAD_REQUEST = 400
 }
 
-const loggerCode: string = `const log = (input) => {
-  const div = document.createElement('DIV');
-  div.innerHTML = '> ' + input;
-  document.getElementById('output').appendChild(div);
-}\n\n`
-
 app.use('/', express.static('ng-dist/tsfiddle-frontend'));
 
 app.post('/api/compile', async function (req: any, res) {
@@ -32,7 +26,7 @@ app.post('/api/compile', async function (req: any, res) {
     const fileWithoutExtesion = `${GENERATED_FILES_DIRECTORY}/${uuid}`
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
-    await fs.outputFile(tsFile, `${loggerCode}${input.replace(/console\.log/g, 'log')}`);
+    await fs.outputFile(tsFile, input);
     try {
       await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
     } catch (err) {
