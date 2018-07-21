@@ -18,6 +18,7 @@ export class AppComponent {
   runCode() {
     this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
       this.output = resp.compiledJS;
+      eval(this.output);
     }, errorResp => {
       console.error(errorResp);
       alert('Oops, something went wrong.');

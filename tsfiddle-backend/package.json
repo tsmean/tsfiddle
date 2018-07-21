@@ -6,6 +6,7 @@
     "deploy": "./deploy.sh"
   },
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "fs-extra": "^7.0.0",
     "uuid": "^3.3.2"

@@ -3,10 +3,13 @@ import { resolve } from 'url';
 import {exec} from 'child_process';
 const fs = require('fs-extra');
 const uuidv1 = require('uuid/v1');
-const app = express();
 const GENERATED_FILES_DIRECTORY = 'generated';
 const util = require('util');
 const execPromise = util.promisify(exec);
+var cors = require('cors');
+
+const app = express();
+app.use(cors());
 
 enum STATUS_CODES {
   BAD_REQUEST = 400
@@ -32,5 +35,6 @@ app.get('/', async function (req, res) {
     res.status(500).send(err);
   }
 });
-app.listen(5638);
-console.log('listening for incoming traffic...');
+const port = 5638
+app.listen(port);
+console.log(`listening on port ${port}`);
