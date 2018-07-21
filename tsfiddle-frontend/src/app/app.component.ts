@@ -35,7 +35,7 @@ export class AppComponent {
         target: monaco.languages.typescript.ScriptTarget.ES5,
         allowNonTsExtensions: true
       });
-      monaco.languages.typescript.getJavaScriptWorker()
+      monaco.languages.typescript.getTypeScriptWorker()
         .then(worker => {
           worker(model.uri)
             .then(client => {
@@ -56,15 +56,16 @@ export class AppComponent {
     removeAllChildren(document.getElementById('output'));
   }
 
-  runCode() {
+  runCodeInFrontend() {
     this.reset();
-    // this.loading = true;
+    this.loading = true;
     this.transpile().then(resp => {
       console.log(JSON.stringify(resp));
       const js = resp.outputFiles[0].text;
       if (js) {
         const parsedJs = loggerCode + js.replace(/console\.log/g, 'log');
         eval(parsedJs);
+        this.loading = false;
       } else {
         this.noOutput = true;
       }
@@ -74,23 +75,26 @@ export class AppComponent {
     }).catch(errorResp => {
       console.log(errorResp);
     });
+  }
 
-    // this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
-    //   this.loading = false;
-    //   if (resp.compilationError != null) {
-    //     this.compilationError = resp.compilationError.stdout;
-    //   } else {
-    //     eval(resp.compiledJS);
-    //     if (this.output.nativeElement.children.length === 0) {
-    //       this.noOutput = true;
-    //     }
-    //   }
-    // }, errorResp => {
-    //   this.loading = false;
-    //   console.error(errorResp);
-    //   alert('Oops, something went wrong.');
-    // });
-
+  runCode() {
+    this.reset();
+    this.loading = true;
+    this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
+      this.loading = false;
+      if (resp.compilationError != null) {
+        this.compilationError = resp.compilationError.stdout;
+      } else {
+        eval(resp.compiledJS);
+        // if (this.output.nativeElement.children.length === 0) {
+        //   this.noOutput = true;
+        // }
+      }
+    }, errorResp => {
+      this.loading = false;
+      console.error(errorResp);
+      alert('Oops, something went wrong.');
+    });
   }
 }
 
