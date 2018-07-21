@@ -13,6 +13,9 @@ const monacoConfig: NgxMonacoEditorConfig = {
     minimap: {
       enabled: false
     }
+  },
+  onMonacoLoad: () => {
+    const monaco = (<any>window).monaco;
   }
 };
 

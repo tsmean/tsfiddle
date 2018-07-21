@@ -20,6 +20,7 @@
       <div class="editor">
         <ngx-monaco-editor class="monaco-editor"
                            [options]="editorOptions"
+                           (onInit)="onEditorInit($event)"
                            [(ngModel)]="input"></ngx-monaco-editor>
       </div>
 
