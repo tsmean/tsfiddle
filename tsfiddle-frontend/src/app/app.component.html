@@ -1,18 +1,31 @@
 <div class="page-wrapper">
   <div class="navbar">
-    <!-- <button class="primary">SAVE</button> -->
-    <button class="last-button primary"
-            (click)="runCode()">RUN</button>
+    <button class="primary img-button">
+      <img src="/assets/img/tsfiddle-logo.png"
+           height="40"
+           alt="">
+    </button>
+    <div class="navbar-right">
+      <!-- <button class="primary">SAVE</button> -->
+      <button class="last-button primary"
+              (click)="runCode()">RUN</button>
+    </div>
   </div>
   <div class="editor-and-output-wrapper">
     <div class="editor-wrapper">
-      <div class="predefined">// use
-        <code>log</code> instead of
-        <code>console.log</code>
+      <!-- TODO IMPORTANT: think about logging!!!!! -->
+      <div class="predefined">
+        import &#123;log&#125; from 'tsfiddle-logger';
       </div>
-      <textarea autofocus
+      <div class="editor">
+        <ngx-monaco-editor class="monaco-editor"
+                           [options]="editorOptions"
+                           [(ngModel)]="input"></ngx-monaco-editor>
+      </div>
+
+      <!-- <textarea autofocus
                 [(ngModel)]="input"
-                class="editor"></textarea>
+                class="editor"></textarea> -->
     </div>
     <div class="output-wrapper">
       <div style="padding-bottom: 5px">Output:</div>
@@ -26,7 +39,8 @@
            *ngIf="noOutput">
         (there was no output)
       </div>
-      <div id="output" #output>
+      <div id="output"
+           #output>
 
       </div>
     </div>

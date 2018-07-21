@@ -20,11 +20,12 @@ button {
         background: #888888;
         color: white;
     }
+    &.img-button {
+        padding: 0;
+        background: transparent;
+    }
 }
 
-::selection {
-    background: #FFC400;
-}
 
 * {
     box-sizing: border-box;

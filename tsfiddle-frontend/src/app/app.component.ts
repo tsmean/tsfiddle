@@ -8,10 +8,12 @@ import { TscService } from './tsc.service';
 })
 export class AppComponent {
 
-  input: string;
   compilationError: string;
   loading: boolean = false;
   noOutput: boolean = false;
+
+  editorOptions = {theme: 'vs-dark', language: 'javascript'};
+  input: string= `log("Hello world!")`;
 
   @ViewChild('output')
   output;
