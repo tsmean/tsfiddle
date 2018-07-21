@@ -12,7 +12,7 @@ export class AppComponent {
   loading: boolean = false;
   noOutput: boolean = false;
 
-  editorOptions = { theme: 'vs-dark', language: 'javascript' };
+  editorOptions = { theme: 'vs-dark', language: 'typescript' };
   input: string = `console.log("Hello world!")`;
   editor = null;
 
