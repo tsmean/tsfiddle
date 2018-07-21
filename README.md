@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="100px" width="300px" style="text-align: center; background: black;" src=" https://s3.eu-central-1.amazonaws.com/bersling/images/tsfiddle-logo.png">
+  <!-- <img height="100px" width="300px" style="text-align: center; background: black;" src=" https://s3.eu-central-1.amazonaws.com/bersling/images/tsfiddle-logo.png"> -->
   <h1 align="center">tsfiddle</h1>
 </p>
 
