@@ -12,6 +12,7 @@ Both the frontend and the backend are capable of transpiling TypeScript. So wher
 
 ### Pro Backend
 - Heavy dependencies such as Angular can be preinstalled on the server
+- 
 
 ## Evaluating the JavaScript output: Frontend or Backend?
 
@@ -29,8 +30,12 @@ Both the frontend and the backend can evaluate the generated JavaScript. In the 
 
 ** When you `eval` user code nasty stuff can happen... We'd either need a JS parser or an iframe. I don't know yet how safe the iframe would be. For example, could cookies still be accessed? Also see here https://www.quora.com/How-can-I-create-an-iframe-and-not-allow-it-to-access-cookies.
 
-## Storage
+## Logging
 
+How should I do it with the logging? Should I take `console.log` and modify it? Should I use a custom `log` function? Should I let the user import the logger (`import {log} from '@tsfiddle/logger'`) or should I provide this implicitly...?
+
+
+## Storage
 Once the users can store their fiddles, we also need a good concept.
 
 ### Database
@@ -38,4 +43,6 @@ Where should we store the fiddles? MongoDB? PostgreSQL? https://github.com/Houzu
 
 ### How sould we version docs?
 How about each save generates a new id...? That way you don't need a login concept (just yet).
+
+
 

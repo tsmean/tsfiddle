@@ -16,11 +16,12 @@ const monacoConfig: NgxMonacoEditorConfig = {
   },
   onMonacoLoad: () => {
     const monaco = (<any>window).monaco;
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-      target: monaco.languages.typescript.ScriptTarget.ES5,
-      lib: ['ES5', 'ES2015', 'DOM'],
-      allowNonTsExtensions: true
-    });
+    // I don't know what's wrong with this setup, but it for sure causes a lot of problems...
+    // monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+    //   target: monaco.languages.typescript.ScriptTarget.ES5,
+    //   lib: [ "es2015", "dom" ],
+    //   allowNonTsExtensions: true
+    // });
     monaco.languages.typescript.typescriptDefaults.addExtraLib(
       `declare function log(input: string) : string`
     );
