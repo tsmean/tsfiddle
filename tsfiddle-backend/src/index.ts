@@ -62,7 +62,6 @@ ${setupCustomScript}
 ${input}
 ${tearDownCustomScript}
 `);
-    console.log(await fs.readFile(tsFile, 'utf8'));
     try {
       await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
     } catch (err) {
