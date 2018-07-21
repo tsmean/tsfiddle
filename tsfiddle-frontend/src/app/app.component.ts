@@ -64,8 +64,6 @@ export class AppComponent {
         const parsedJs = loggerCode + js.replace(/console\.log/g, 'log');
         eval(parsedJs);
         this.loading = false;
-      } else {
-        this.noOutput = true;
       }
     }).catch(errorResp => {
       console.log(errorResp);
