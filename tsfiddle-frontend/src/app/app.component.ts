@@ -62,6 +62,7 @@ export class AppComponent {
       const js = resp.outputFiles[0].text;
       if (js) {
         const parsedJs = loggerCode + js;
+        this.reset();
         eval(parsedJs);
         this.loading = false;
       }
@@ -78,6 +79,7 @@ export class AppComponent {
       if (resp.compilationError != null) {
         this.compilationError = resp.compilationError.stdout;
       } else {
+        this.reset();
         eval(resp.compiledJS);
         // if (this.output.nativeElement.children.length === 0) {
         //   this.noOutput = true;
