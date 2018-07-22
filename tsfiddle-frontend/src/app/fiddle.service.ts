@@ -15,16 +15,17 @@ export class FiddleService {
     private http: HttpClient
   ) {
     this.getFiddle(0).subscribe(logIt, logIt);
-    this.createFiddle({
-      content: `console.log('haha!')`
-    }).subscribe(logIt, logIt);
+    this.createFiddle(`console.log('haha!')`).subscribe(logIt, logIt);
   }
 
   getFiddle(id: DatabaseId) {
     return this.http.get(`${ENDPOINT_ROOT}/${id}`);
   }
 
-  createFiddle(fiddle: UnpersistedFiddle) {
+  createFiddle(content: string) {
+    const fiddle: UnpersistedFiddle = {
+      content: content
+    }
     return this.http.post(ENDPOINT_ROOT, fiddle);
   }
 

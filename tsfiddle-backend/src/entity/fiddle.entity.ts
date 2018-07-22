@@ -3,6 +3,6 @@ import { BaseEntity } from "./base.entity";
 
 @Entity()
 export class Fiddle extends BaseEntity {
-    @Column()
+    @Column('text')
     content: string;
 }

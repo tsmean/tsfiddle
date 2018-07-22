@@ -12,7 +12,8 @@ export async function createFiddle(content: string) {
             resolve(fiddle);
         } catch(err) {
             console.error('Could not create entity:', fiddle);
-            reject(err);
+            console.error(err);
+            reject(new ErrorObject(ErrorCode.ORM_ERROR));
         }
         
     })

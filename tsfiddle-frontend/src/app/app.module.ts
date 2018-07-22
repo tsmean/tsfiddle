@@ -7,15 +7,22 @@ import { SpinnerModule } from '@tsmean/spinner';
 import { FormsModule } from '@angular/forms';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { monacoConfig } from './editor.config';
+import {NotifyModule} from '@tsmean/toast'
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './router/routes';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
+    NotifyModule.forRoot(),
     SpinnerModule.forRoot({
       primaryColor: 'white',
       secondaryColor: '#00ff00',
