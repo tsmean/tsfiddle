@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
   saveFiddle() {
     this.fiddleService.createFiddle(this.input).subscribe((resp: Fiddle) => {
       this.router.navigate(['/fiddle', resp.id]);
+      this.notify.success('Saved');
     }, errorResp => {
       this.notify.error('Oops, the fiddle could not be stored.');
     });
