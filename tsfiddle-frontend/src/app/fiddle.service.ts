@@ -13,10 +13,7 @@ export class FiddleService {
 
   constructor(
     private http: HttpClient
-  ) {
-    this.getFiddle(0).subscribe(logIt, logIt);
-    this.createFiddle(`console.log('haha!')`).subscribe(logIt, logIt);
-  }
+  ) {}
 
   getFiddle(id: DatabaseId) {
     return this.http.get(`${ENDPOINT_ROOT}/${id}`);

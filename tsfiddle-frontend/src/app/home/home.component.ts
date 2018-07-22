@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
     this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
       this.loading = false;
       if (resp.compilationError != null) {
-        this.compilationError = resp.compilationError.stdout;
+        this.compilationError = resp.compilationError;
       } else {
         runCodeInIframe(setupCustomScript, resp.compiledJS);
       }
