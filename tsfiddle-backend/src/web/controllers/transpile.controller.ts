@@ -1,7 +1,8 @@
 import { transpileTypescript } from '../../services/transpile.service';
+import { Endpoint } from '../endpoints';
 
 export function registerTranspileTypescript(app) {
-  app.post('/api/compile', async (req: any, res) => {
+  app.post(Endpoint.COMPILE, async (req: any, res) => {
     try {
       res.send(await transpileTypescript(req.body.input))
     } catch (err) {

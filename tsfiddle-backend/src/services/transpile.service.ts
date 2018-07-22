@@ -24,7 +24,6 @@ export async function transpileTypescript(input: string) {
             await doBrowserify(jsFile, bundle);
             const js = await fs.readFile(bundle, 'utf8');
             await fs.remove(`${generatedFilesDirectory}`);
-            console.log('here')
             resolve({ compiledJS: js })
         } catch (err) {
             reject(err);
