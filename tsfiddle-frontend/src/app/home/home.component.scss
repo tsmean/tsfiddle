@@ -4,6 +4,12 @@ $navbar-height: 70px;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    .about {
+        font-size: 9px;
+        .about-link {
+            padding: 5px;
+        }
+    }
     .navbar {
         flex-basis: $navbar-height;
         flex-shrink: 0;

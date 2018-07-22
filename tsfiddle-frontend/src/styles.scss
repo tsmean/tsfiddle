@@ -3,10 +3,21 @@
 html, body {
     margin: 0;
     padding: 0;
+    background: #0f0f0f;
+    color: white;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }
 
 body {
     font-family: sans-serif;
+    line-height: 1.5;
 }
 
 button {

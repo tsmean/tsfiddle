@@ -11,11 +11,15 @@ import {NotifyModule} from '@tsmean/toast'
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './router/routes';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { PageContainerComponent } from './page-container/page-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent,
+    PageContainerComponent
   ],
   imports: [
     BrowserModule,

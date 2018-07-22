@@ -1,41 +1,45 @@
 <div class="page-wrapper">
-    <div class="navbar">
-      <button class="primary img-button">
-        <img src="/assets/img/tsfiddle-logo.png"
-             height="40"
-             alt="">
+  <div class="navbar">
+    <button class="primary img-button">
+      <img src="/assets/img/tsfiddle-logo.png"
+           height="40"
+           alt="">
+    </button>
+    <div class="navbar-right">
+      <button class="primary"
+              (click)="saveFiddle()">
+        SAVE
       </button>
-      <div class="navbar-right">
-        <button class="primary"
-                (click)="saveFiddle()">
-          SAVE
-        </button>
-        <button class="last-button primary"
-                (click)="runCode()">
-          RUN
-        </button>
-      </div>
-    </div>
-    <div class="editor-and-output-wrapper">
-      <div class="editor-wrapper">
-        <div class="editor">
-          <ngx-monaco-editor class="monaco-editor"
-                             [options]="editorOptions"
-                             (onInit)="onEditorInit($event)"
-                             *ngIf="input != null"
-                             [(ngModel)]="input"></ngx-monaco-editor>
-          <spinner color="primary" *ngIf="input == null"></spinner>
-        </div>
-      </div>
-      <div class="output-wrapper">
-        <div style="padding-bottom: 5px">Output:</div>
-        <spinner *ngIf="loading"
-                 color="primary"></spinner>
-        <div class="compilation-error"
-             *ngIf="compilationError">
-          {{compilationError}}
-        </div>
-        <div id="iframe-wrapper"></div>
-      </div>
+      <button class="last-button primary"
+              (click)="runCode()">
+        RUN
+      </button>
     </div>
   </div>
+  <div class="editor-and-output-wrapper">
+    <div class="editor-wrapper">
+      <div class="editor">
+        <ngx-monaco-editor class="monaco-editor"
+                           [options]="editorOptions"
+                           (onInit)="onEditorInit($event)"
+                           *ngIf="input != null"
+                           [(ngModel)]="input"></ngx-monaco-editor>
+        <spinner color="primary"
+                 *ngIf="input == null"></spinner>
+      </div>
+    </div>
+    <div class="output-wrapper">
+      <div style="padding-bottom: 5px">Output:</div>
+      <spinner *ngIf="loading"
+               color="primary"></spinner>
+      <div class="compilation-error"
+           *ngIf="compilationError">
+        {{compilationError}}
+      </div>
+      <div id="iframe-wrapper"></div>
+    </div>
+  </div>
+  <div class="about">
+    <a routerLink="/about" class="about-link">Terms of Use &amp; About</a>
+  </div>
+</div>
