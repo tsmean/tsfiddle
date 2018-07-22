@@ -1,5 +1,6 @@
 import {createConnection, Connection} from "typeorm";
 import {Fiddle} from "./fiddle.entity";
+import { getConnectionOptions } from 'typeorm';
 
 let databaseConnection;
 
@@ -14,7 +15,11 @@ export function getDatabaseConnection(): Promise <Connection> {
                 resolve(con);
             } catch (err) {
                 console.error('Could not get database connection.');
-                reject(err);
+                console.error(err);
+                const connectionOptions: any = await getConnectionOptions();
+                
+                console.log('Connection Options were: ', connectionOptions.host, connectionOptions.port, connectionOptions.username);
+                reject();
             }
         }
     })

@@ -19,8 +19,7 @@ async function startApp() {
     try {
         await getDatabaseConnection();
     } catch {
-        console.error('Exiting program since db connection could not be established');
-        process.exit(1);
+        console.log('well, looks like the db isnt connected, but the app is still useful...');
     }
     app.listen(port);
     console.log(`listening on port ${port}`);

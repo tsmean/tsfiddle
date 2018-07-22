@@ -3,6 +3,7 @@ FROM node:8
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
 COPY tsconfig.json /app/tsconfig.json
+COPY ormconfig.prod.json /app/ormconfig.json
 COPY src /app/src
 COPY ng-dist /app/ng-dist
 WORKDIR /app
