@@ -1,0 +1,10 @@
+# docker-compose -f mysql.compose.yml u
+version: '3'
+services:
+  mysql:
+    image: mysql:5
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_PASSWORD=test

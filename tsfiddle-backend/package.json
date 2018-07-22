@@ -7,7 +7,7 @@
     "start": "nodemon",
     "build": "tsc",
     "start:prod": "node dist/index.js",
-    "build:docker": "docker build -t tsmean/tsfiddle .",
+    "build:docker": "docker build -t tsmean/tsfiddle -f docker/server.dockerfile .",
     "publish:docker": "docker push tsmean/tsfiddle",
     "deploy": "./stackdeploy.sh"
   },
@@ -19,6 +19,9 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "fs-extra": "^7.0.0",
+    "mysql": "^2.16.0",
+    "reflect-metadata": "^0.1.12",
+    "typeorm": "^0.2.7",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
