@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TscService } from './tsc.service';
+import { resolve } from '../../node_modules/@types/q';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent {
 
   reset() {
     this.compilationError = null;
-    removeAllChildren(document.getElementById('output'));
+    resetIframe();
   }
 
   runCode() {
@@ -38,8 +39,7 @@ export class AppComponent {
       if (resp.compilationError != null) {
         this.compilationError = resp.compilationError.stdout;
       } else {
-        this.reset();
-        eval(resp.compiledJS);
+        runCodeInIframe(setupCustomScript, resp.compiledJS);
       }
     }, errorResp => {
       this.loading = false;
@@ -47,6 +47,45 @@ export class AppComponent {
       alert('Oops, something went wrong.');
     });
   }
+
+}
+
+const LOG_ENTRY_CLASS = 'log-entry';
+
+function runCodeInIframe (setup: string, js: string) {
+  const iframeElt = getIframe();
+  const iWindow = iframeElt.contentWindow;
+  const iDocument = iframeElt.contentDocument;
+  iDocument.body.setAttribute('style', 'font-family: monospace; color: white;');
+  const styleTag = document.createElement('STYLE');
+  styleTag.innerHTML = `.${LOG_ENTRY_CLASS}{padding-bottom: 5px}`
+  iDocument.head.appendChild(styleTag);
+  (<any>iWindow).eval(`${setup}${js}`);
+  console.log(iWindow.document.cookie);
+  console.log(document.cookie);
+}
+
+const setupCustomScript = `
+var console = {};
+console.log = function(message){
+  const div = document.createElement('DIV');
+  div.className = '${LOG_ENTRY_CLASS}';
+  div.innerHTML = '> ' + message;
+  document.body.appendChild(div);
+};
+`;
+
+function resetIframe(): Promise<void> {
+  return new Promise(resolve => {
+    const iframe = <HTMLIFrameElement>document.createElement('IFRAME');
+    iframe.setAttribute('frameBorder', '0');
+    iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+    iframe.id = IFRAME_ID;
+    iframe.className = 'frame';
+    const wrapper = getFrameWrapper();
+    removeAllChildren(wrapper);
+    wrapper.appendChild(iframe);
+  });
 }
 
 export function removeAllChildren(node: HTMLElement) {
@@ -105,6 +144,17 @@ interface User {
 interface Todo {
   todo: string;
 }`;
+
+const IFRAME_ID = 'frame';
+const IFRAME_WRAPPER_ID = 'iframe-wrapper'
+
+function getIframe(): HTMLIFrameElement {
+  return <HTMLIFrameElement>document.getElementById(IFRAME_ID);
+}
+
+function getFrameWrapper(): HTMLElement {
+  return <HTMLIFrameElement>document.getElementById(IFRAME_WRAPPER_ID);
+}
 
 interface EmitOutput {
   emitSkipped: boolean;

@@ -14,17 +14,6 @@ app.use(bodyParser.json());
 enum STATUS_CODES {
   BAD_REQUEST = 400
 }
-const loggerAsString = `function (message?: any, ...optionalParams: any[]) {
-  const div = document.createElement('DIV');
-  div.innerHTML = '> ' + message;
-  document.getElementById('output').appendChild(div);
-}`
-const setupCustomScript = `
-var console: Console = {...console};
-console.log = ${loggerAsString};
-`;
-const tearDownCustomScript = `
-`
 async function doBrowserify(jsFile, outFile) {
   await execPromise(`browserify ${jsFile} -o ${outFile}`);
 }
@@ -38,11 +27,7 @@ app.post('/api/compile', async function (req: any, res) {
     const tsFile = fileWithoutExtesion + '.ts';
     const jsFile = fileWithoutExtesion + '.js';
     const bundle = fileWithoutExtesion + 'bundle.js';
-    await fs.outputFile(tsFile, `
-${setupCustomScript}
-${input}
-${tearDownCustomScript}
-`);
+    await fs.outputFile(tsFile, input);
     try {
       await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
     } catch (err) {
