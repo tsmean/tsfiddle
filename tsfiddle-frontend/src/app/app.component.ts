@@ -16,9 +16,6 @@ export class AppComponent {
   input: string = EDITOR_TEMPLATE;
   editor = null;
 
-  @ViewChild('output')
-  output;
-
   constructor(private tscService: TscService) {
   }
 
@@ -52,17 +49,16 @@ export class AppComponent {
 
 const LOG_ENTRY_CLASS = 'log-entry';
 
-function runCodeInIframe (setup: string, js: string) {
-  const iframeElt = getIframe();
-  const iWindow = iframeElt.contentWindow;
-  const iDocument = iframeElt.contentDocument;
-  iDocument.body.setAttribute('style', 'font-family: monospace; color: white;');
-  const styleTag = document.createElement('STYLE');
-  styleTag.innerHTML = `.${LOG_ENTRY_CLASS}{padding-bottom: 5px}`
-  iDocument.head.appendChild(styleTag);
-  (<any>iWindow).eval(`${setup}${js}`);
-  console.log(iWindow.document.cookie);
-  console.log(document.cookie);
+function runCodeInIframe(setup: string, js: string) {
+  const iframe = <HTMLIFrameElement>document.createElement('IFRAME');
+  iframe.setAttribute('frameBorder', '0');
+  iframe.setAttribute('sandbox', 'allow-scripts');
+  iframe.id = IFRAME_ID;
+  iframe.className = 'frame';
+  const html = buildIframeHtml(setup.concat(js));
+  iframe.src = "data:text/html;charset=utf-8," + escape(html);
+  const wrapper = getFrameWrapper();
+  wrapper.appendChild(iframe);
 }
 
 const setupCustomScript = `
@@ -76,20 +72,30 @@ console.log = function(message){
 `;
 
 function resetIframe() {
-  const iframe = <HTMLIFrameElement>document.createElement('IFRAME');
-  iframe.setAttribute('frameBorder', '0');
-  iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
-  iframe.id = IFRAME_ID;
-  iframe.className = 'frame';
   const wrapper = getFrameWrapper();
   removeAllChildren(wrapper);
-  wrapper.appendChild(iframe);
 }
 
 export function removeAllChildren(node: HTMLElement) {
   while (node.firstChild) {
     node.removeChild(node.firstChild);
   }
+}
+
+export function buildIframeHtml(js: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {font-family: monospace; color: white;}
+      .${LOG_ENTRY_CLASS}{padding-bottom: 5px}
+    </style>
+  </head>
+  <body>
+    <script>${js}</script>
+  </body>
+</html>`
 }
 
 export const EDITOR_TEMPLATE = `console.log('Starting...');
