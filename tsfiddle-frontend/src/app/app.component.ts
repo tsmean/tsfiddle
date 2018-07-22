@@ -75,17 +75,15 @@ console.log = function(message){
 };
 `;
 
-function resetIframe(): Promise<void> {
-  return new Promise(resolve => {
-    const iframe = <HTMLIFrameElement>document.createElement('IFRAME');
-    iframe.setAttribute('frameBorder', '0');
-    iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
-    iframe.id = IFRAME_ID;
-    iframe.className = 'frame';
-    const wrapper = getFrameWrapper();
-    removeAllChildren(wrapper);
-    wrapper.appendChild(iframe);
-  });
+function resetIframe() {
+  const iframe = <HTMLIFrameElement>document.createElement('IFRAME');
+  iframe.setAttribute('frameBorder', '0');
+  iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+  iframe.id = IFRAME_ID;
+  iframe.className = 'frame';
+  const wrapper = getFrameWrapper();
+  removeAllChildren(wrapper);
+  wrapper.appendChild(iframe);
 }
 
 export function removeAllChildren(node: HTMLElement) {
