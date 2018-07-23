@@ -14,9 +14,8 @@ Both the frontend and the backend are capable of transpiling TypeScript. So wher
 - Heavy dependencies such as Angular could be preinstalled on the server
 - I haven't figured out yet how I get the info, whether the TypeScript compiles or not from the Monaco editor...
 
-### Intermediate Decision
-Let's leave it in the backend for now. If I've got more time at some point I can still try to make it work in the Frontend. It's not that much slower with the roundtrip anyways and the load won't be that big in the beginning. I think in max. 6h I should be able to get it switched to the frontend if I decide to do so...
-
+### Final Decision
+Frontend compilation... The errors are even displayed directly in the editor, so it's not even necessary to print that...
 
 ## How should we version fiddles?
 How about each save generates a new id...? That way you don't need a login concept (just yet).

@@ -17,7 +17,6 @@ export async function transpileTypescript(input: string) {
             try {
                 await execPromise(`tsc --lib es5,es2015,dom ${tsFile}`);
             } catch (err) {
-                console.log('jaja', err)
                 const parsedError = err.stdout.split('.ts'); // the error output is a bit ugly due to the long, generated file name, so let's beautify it a bit
                 if (parsedError[1] != null) {
                     const [head, tail] = parsedError;
