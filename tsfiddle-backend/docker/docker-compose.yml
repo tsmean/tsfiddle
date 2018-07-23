@@ -13,7 +13,6 @@ services:
         - "traefik.docker.network=traefik"
     ports:
       - "5638:5638"
-      - "3306:3306"
     networks:
       - traefik
 
