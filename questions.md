@@ -18,6 +18,17 @@ Both the frontend and the backend are capable of transpiling TypeScript. So wher
 Let's leave it in the backend for now. If I've got more time at some point I can still try to make it work in the Frontend. It's not that much slower with the roundtrip anyways and the load won't be that big in the beginning. I think in max. 6h I should be able to get it switched to the frontend if I decide to do so...
 
 
+## How should we version fiddles?
+How about each save generates a new id...? That way you don't need a login concept (just yet).
+
+### Intermediate decision
+Append only creating new entries seems alright for now...
+
+
+# Question History
+
+Answered questions are put here for documentation how the project developed.
+
 ## Storage
 We need a good concept how fiddles are stored.
 
@@ -39,14 +50,7 @@ So what if I could use an immensely durable, scalable and serverless **database*
 - It scales well
 
 #### Final decision
-AWS Aurora MySQL. The pro's outweigh the cons.
-
-### How should we version docs?
-How about each save generates a new id...? That way you don't need a login concept (just yet).
-
-# Question History
-
-Answered questions are put here for documentation how the project developed.
+AWS MySQL. It's managed, it's a relational database, it't everything we need & want.
 
 
 ## Evaluating the JavaScript output: Frontend or Backend?
