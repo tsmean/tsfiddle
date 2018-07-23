@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn } from "typeorm";
+import { DatabaseId } from "../models";
 
-export type DatabaseId = string
 export abstract class BaseEntity {
     @PrimaryGeneratedColumn()
     id: DatabaseId;

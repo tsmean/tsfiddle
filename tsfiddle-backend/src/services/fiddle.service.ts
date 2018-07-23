@@ -1,6 +1,8 @@
 import { Fiddle } from "../entity/fiddle.entity";
 import { getDatabaseConnection } from "../entity/connection";
 import { ErrorCode, ErrorObject } from "../error.codes";
+import { HashedDatabaseId } from "../models";
+import { decodeHashedId, hashId } from "./hashid.service";
 
 export async function createFiddle(content: string) {
     return new Promise(async (resolve, reject) => {
@@ -9,7 +11,7 @@ export async function createFiddle(content: string) {
         try {
             const con = await getDatabaseConnection();
             await con.manager.save(fiddle);
-            resolve(fiddle);
+            resolve(new CreateFiddleResponse(fiddle));
         } catch(err) {
             console.error('Could not create entity:', fiddle);
             console.error(err);
@@ -19,12 +21,12 @@ export async function createFiddle(content: string) {
     })
 }
 
-export async function getFiddle(id: string) {
+export async function getFiddle(id: HashedDatabaseId) {
     return new Promise(async (resolve, reject) => {
         try {
             const con = await getDatabaseConnection();
             const repo = con.getRepository(Fiddle);
-            const fiddle = await repo.findOne({id: id});
+            const fiddle = await repo.findOne({id: decodeHashedId(id)});
             if (fiddle != null) {
                 resolve(fiddle);
             } else {
@@ -37,4 +39,13 @@ export async function getFiddle(id: string) {
             reject(new ErrorObject(ErrorCode.ORM_ERROR));
         }
     })
+}
+
+class CreateFiddleResponse {
+    id: HashedDatabaseId;
+    content: string;    
+    constructor(fiddle: Fiddle) {
+        this.content = fiddle.content;
+        this.id = hashId(fiddle.id);
+    }
 }

@@ -2,6 +2,19 @@
 
 There are some open architectural questions for this project. I'll jot them down here.
 
+## Exposing the database id (mysql integer) isn't really nice
+
+Solution: Use https://github.com/ivanakimov/hashids.js
+
+pro's:
+- other fiddles aren't immediately searchable
+
+con's
+- another dependency
+- it's really hard to get rid of this...
+
+What would be a possible 'get rid of this' plan?
+
 ## Frontend vs Backend Transpilation
 
 Both the frontend and the backend are capable of transpiling TypeScript. So where does it make more sense?
