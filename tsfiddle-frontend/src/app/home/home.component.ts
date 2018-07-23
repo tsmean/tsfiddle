@@ -79,6 +79,37 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  transpile = (): Promise<EmitOutput> => {
+    let model = this.editor.getModel();
+    return new Promise(resolve => {
+      monaco.languages.typescript.getTypeScriptWorker()
+        .then(worker => {
+          worker(model.uri)
+            .then(client => {
+              client.getEmitOutput(model.uri.toString()).then(r => {
+                resolve(r);;
+              });
+            });
+        });
+    });
+  }
+
+  runCodeInFrontend() {
+    this.reset();
+    this.loading = true;
+    this.transpile().then(resp => {
+      const js = resp.outputFiles[0].text;
+      if (js) {
+        this.reset();
+        runCodeInIframe(setupCustomScript, js);
+        this.loading = false;
+      }
+    }).catch(errorResp => {
+      console.log(errorResp);
+    });
+  }
+
+
 }
 
 function runCodeInIframe(setup: string, js: string) {
