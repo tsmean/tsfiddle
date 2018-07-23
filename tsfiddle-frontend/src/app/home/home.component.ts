@@ -62,42 +62,10 @@ export class HomeComponent implements OnInit {
     resetIframe();
   }
 
-  runCode() {
+  transpileCode() {
     this.reset();
     this.loading = true;
-    this.tscService.compileCode(this.input).subscribe((resp: TscResponse) => {
-      this.loading = false;
-      if (resp.compilationError != null) {
-        this.compilationError = resp.compilationError;
-      } else {
-        runCodeInIframe(setupCustomScript, resp.compiledJS);
-      }
-    }, errorResp => {
-      this.loading = false;
-      console.error(errorResp);
-      alert('Oops, something went wrong.');
-    });
-  }
-
-  transpile = (): Promise<EmitOutput> => {
-    let model = this.editor.getModel();
-    return new Promise(resolve => {
-      monaco.languages.typescript.getTypeScriptWorker()
-        .then(worker => {
-          worker(model.uri)
-            .then(client => {
-              client.getEmitOutput(model.uri.toString()).then(r => {
-                resolve(r);;
-              });
-            });
-        });
-    });
-  }
-
-  runCodeInFrontend() {
-    this.reset();
-    this.loading = true;
-    this.transpile().then(resp => {
+    this.tscService.transpile(this.editor.getModel()).then(resp => {
       const js = resp.outputFiles[0].text;
       if (js) {
         this.reset();
@@ -108,7 +76,6 @@ export class HomeComponent implements OnInit {
       console.log(errorResp);
     });
   }
-
 
 }
 
@@ -145,13 +112,7 @@ function getFrameWrapper(): HTMLElement {
   return <HTMLIFrameElement>document.getElementById(IFRAME_WRAPPER_ID);
 }
 
-interface EmitOutput {
-  emitSkipped: boolean;
-  outputFiles: {
-    name: string;
-    text: string;
-  }[]
-}
+
 
 interface TscResponse {
   compiledJS: string;

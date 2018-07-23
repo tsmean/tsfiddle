@@ -1,5 +1,4 @@
 import * as express from 'express';
-import { registerTranspileTypescript } from './web/controllers/transpile.controller';
 import { registerFiddleCRUD } from './web/controllers/fiddle.controller';
 var cors = require('cors');
 var bodyParser = require('body-parser');
@@ -13,7 +12,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '../ng-dist/tsfiddle-frontend')));
-registerTranspileTypescript(app);
 registerFiddleCRUD(app);
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '../ng-dist/tsfiddle-frontend/index.html'));
