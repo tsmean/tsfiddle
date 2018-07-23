@@ -2,19 +2,6 @@
 
 There are some open architectural questions for this project. I'll jot them down here.
 
-## Exposing the database id (mysql integer) isn't really nice
-
-Solution: Use https://github.com/ivanakimov/hashids.js
-
-pro's:
-- other fiddles aren't immediately searchable
-
-con's
-- another dependency
-- it's really hard to get rid of this...
-
-What would be a possible 'get rid of this' plan?
-
 ## Frontend vs Backend Transpilation
 
 Both the frontend and the backend are capable of transpiling TypeScript. So where does it make more sense?
@@ -41,6 +28,23 @@ Append only creating new entries seems alright for now...
 # Question History
 
 Answered questions are put here for documentation how the project developed.
+
+## Exposing the database id (mysql integer) isn't really nice
+
+Possible Solution: Use https://github.com/ivanakimov/hashids.js
+
+pro's:
+- other fiddles aren't immediately searchable
+
+con's
+- another dependency
+- it's really hard to get rid of this...
+
+What would be a possible 'get rid of this' plan?
+
+### Final decision
+
+Use the library suggested. Another question was, should I use a secret or not? I decided to go for the 'not' case, since it keeps everything a bit simpler and the fiddles don't really need protection. I even thought it's ok to expose the mysql id, but hashing does make it look a bit more professional.
 
 ## Storage
 We need a good concept how fiddles are stored.
