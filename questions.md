@@ -2,6 +2,10 @@
 
 There are some open architectural questions for this project. I'll jot them down here.
 
+# Question History
+
+Answered questions are put here for documentation how the project developed.
+
 ## Frontend vs Backend Transpilation
 
 Both the frontend and the backend are capable of transpiling TypeScript. So where does it make more sense?
@@ -23,10 +27,6 @@ How about each save generates a new id...? That way you don't need a login conce
 ### Intermediate decision
 Append only creating new entries seems alright for now...
 
-
-# Question History
-
-Answered questions are put here for documentation how the project developed.
 
 ## Exposing the database id (mysql integer) isn't really nice
 
